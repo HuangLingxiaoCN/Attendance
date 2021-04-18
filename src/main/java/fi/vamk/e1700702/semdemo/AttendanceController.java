@@ -21,12 +21,20 @@ public class AttendanceController {
 
   @PostMapping("/attendance")
   public @ResponseBody Attendance create(@RequestBody Attendance item) {
-    return repository.save(item);
+    if (item.getDate() == null) {
+      return repository.findByKey(item.getKey());
+    }
+    else
+      return repository.save(item);
   }
 
   @PutMapping("/attendance")
   public @ResponseBody Attendance update(@RequestBody Attendance item) {
-    return repository.save(item);
+    if (item.getDate() == null) {
+      return repository.findByKey(item.getKey());
+    }
+    else
+      return repository.save(item);
   }
 
   @DeleteMapping("/attendance")

@@ -1,6 +1,8 @@
 package fi.vamk.e1700702.semdemo;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,12 +18,14 @@ public class Attendance implements Serializable{
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   private String key;
+  private Date date;
 
-  public Attendance() {
+  public Attendance(String key, Date date) {
+    this.key = key;
+    this.date = date;
   }
 
-  public Attendance(String key) {
-    this.key = key;
+  public Attendance() {
   }
 
   public int getId() {
@@ -39,8 +43,17 @@ public class Attendance implements Serializable{
   public void setKey(String key) {
     this.key = key;
   }
-  
-  public String toString() {
-    return id + " " + key;
+
+  public Date getDate() {
+    return this.date;
   }
+
+  public void setDate(Date date) {
+    this.date = date;
+  }
+
+  public String toString() {
+    return id + " " + key + " " + date;
+  }
+
 }

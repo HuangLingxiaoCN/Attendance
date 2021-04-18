@@ -3,6 +3,8 @@ package fi.vamk.e1700702.semdemo;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Date;
+
 import org.apache.commons.collections4.IterableUtils;
 import org.assertj.core.util.IterableUtil;
 import org.junit.jupiter.api.Test;
@@ -31,7 +33,8 @@ public class AttendanceControllerTests {
     Iterable<Attendance> begin = repository.findAll();
     // System.out.println(IterableUtils.size(begin));
     // Given
-    Attendance att = new Attendance("ABCD");
+    Date date = new Date();
+    Attendance att = new Attendance("ABCD", date);
     System.out.println("ATT: " + att.toString());
 
     // Test save
@@ -39,8 +42,8 @@ public class AttendanceControllerTests {
     System.out.println("SAVED: " + saved.toString());
 
     // when
-    Attendance found = repository.findByKey(att.getKey());
-    System.out.println("FOUND: " + found.toString());
+    Attendance found = repository.findByDate(att.getDate());
+    System.out.println("FOUND BY DATE: " + found.toString());
 
     // then
     assertThat(found.getKey()).isEqualTo(att.getKey());
